@@ -3,7 +3,11 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:pdf_viewer/page/audio_to_pdf_page.dart';
+import 'package:pdf_viewer/page/homePage.dart';
 import 'package:pdf_viewer/page/pdf_viewer_example.dart';
+import 'package:pdf_viewer/page/profilePage.dart';
 
 import 'api/pdf_api.dart';
 
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(
-          primaryColor: Colors.blue,
+          primaryColor: Color.fromARGB(255, 124, 25, 245),
         ),
         home: MainPage(),
       );
@@ -39,60 +43,29 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  int currentindex = 1;
+  final pages = [Audio_pdf(), Home(), Profile()];
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  child: Text('Asset PDF'),
-                  onPressed: () async {
-                    final path = 'assets/sample.pdf';
-                    final file = await PDFApi.loadAsset(path);
-                    openPDF(context, file);
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextButton(
-                  child: Text('File PDF'),
-                  onPressed: () async {
-                    final file = await PDFApi.pickFile();
-
-                    if (file == null) return;
-                    openPDF(context, file);
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextButton(
-                  child: Text('Network PDF'),
-                  onPressed: () async {
-                    final url =
-                        'https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf';
-                    final file = await PDFApi.loadNetwork(url);
-                    openPDF(context, file);
-                  },
-                ),
-                const SizedBox(height: 16),
-                // ButtonWidget(
-                //   text: 'Firebase PDF',
-                //   onClicked: () async {
-                //     final url = 'sample.pdf';
-                //     final file = await PDFApi.loadFirebase(url);
-
-                //     if (file == null) return;
-                //     openPDF(context, file);
-                //   },
-                // ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-  void openPDF(BuildContext context, File file) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)),
+        body: pages[currentindex],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentindex,
+            backgroundColor: Color.fromARGB(255, 39, 39, 39),
+            unselectedItemColor: Colors.white70,
+            onTap: (index) => setState(() => currentindex = index),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.mic_external_on),
+                label: "Audio to PDF",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
+              ),
+            ]),
       );
 }
