@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: Color.fromARGB(255, 39, 39, 39),
             unselectedItemColor: Colors.white70,
             onTap: (index) => setState(() => currentindex = index),
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.mic_external_on),
                 label: "Audio to PDF",
