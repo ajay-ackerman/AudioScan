@@ -34,10 +34,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_speed_dial: ^6.0.0
+  flutter_tts: ^3.3.3
   http: ^0.13.4
   path: ^1.8.0
   path_provider: ^2.0.9
+  pdf_text: ^0.5.0
   syncfusion_flutter_pdf: ^20.1.55-beta
+  text_to_speech: ^0.2.3
   uc_pdfview: ^0.0.3
 
 dev_dependencies:

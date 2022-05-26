@@ -16,9 +16,6 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           title: Text("AUDIOSCAN"),
           backgroundColor: Color.fromARGB(255, 39, 39, 39),
-          actions: [
-            IconButton(onPressed: () => extrator(), icon: Icon(Icons.volume_up))
-          ],
         ),
         body: Container(
           color: Color.fromARGB(255, 148, 148, 148),
@@ -36,17 +33,4 @@ class Home extends StatelessWidget {
   void openPDF(BuildContext context, File file) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)),
       );
-
-  extrator() async {
-    PdfDocument document =
-        PdfDocument(inputBytes: await _readDocumentData('assets/sample.pdf'));
-    PdfTextExtractor extractor = PdfTextExtractor(document);
-    String text = extractor.extractText();
-    print(text);
-  }
-
-  Future<List<int>> _readDocumentData(String name) async {
-    final ByteData data = await rootBundle.load(name);
-    return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-  }
 }
