@@ -10,7 +10,7 @@ import 'package:pdf_viewer/page/pdf_viewer_example.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class Home extends StatelessWidget {
-  late final file;
+  // late final file;
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
             backgroundColor: Color.fromARGB(255, 39, 39, 39),
             onPressed: () async {
-              file = await PDFApi.pickFile();
+              final file = await PDFApi.pickFile();
               if (file == null) return;
               openPDF(context, file);
             },
