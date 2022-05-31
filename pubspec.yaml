@@ -39,6 +39,8 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.9
   pdf_text: ^0.5.0
+  read_pdf_text: ^0.2.1
+  speech_to_text: ^5.5.0
   syncfusion_flutter_pdf: ^20.1.55-beta
   text_to_speech: ^0.2.3
   uc_pdfview: ^0.0.3

@@ -1,18 +1,20 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 //import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
-import 'package:pdf_text/pdf_text.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
+// import 'package:pdf_text/pdf_text.dart';
+import 'package:read_pdf_text/read_pdf_text.dart';
+// import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 import 'package:uc_pdfview/uc_pdfview.dart';
 
 class PDFViewerPage extends StatefulWidget {
   final File file;
 
+  // ignore: use_key_in_widget_constructors
   const PDFViewerPage({
     required this.file,
   });
@@ -23,8 +25,57 @@ class PDFViewerPage extends StatefulWidget {
 
 class _PDFViewerPageState extends State<PDFViewerPage> {
   late PDFViewController controller;
+  late String text;
+  // TextToSpeech tts = TextToSpeech();
+  final FlutterTts tts = FlutterTts();
+  double volume = 1.0;
   int pages = 0;
   int indexPage = 0;
+  bool isStart = true;
+  bool isPlay = false;
+
+  extrator() async {
+    if (isStart) {
+      text = await getPDFtext(widget.file.path) as String;
+      // TextEditingController ttscontroller = TextEditingController(text: text);
+
+      print(text);
+      await tts.setVolume(volume);
+      String language = 'en-US';
+      await tts.setLanguage(language);
+      // await tts.getVoiceByLang(language);
+      await tts.setVoice({
+        //'Voice1' : 'en-us-x-sfg#female_1-local',
+        'Voice2': 'en-us-x-sfg#male_1-local'
+      });
+      // tts.stop();
+      isStart = false;
+      await tts.speak(text);
+      isPlay = true;
+      print("-----------------------");
+      print(isPlay);
+    } else {
+      if (isPlay) {
+        print("-----------------------else isplay");
+        print(isPlay);
+        await tts.stop();
+      } else {
+        print("-----------------------elselese");
+        print(isPlay);
+        await tts.speak(text);
+      }
+    }
+  }
+
+  Future<String> getPDFtext(String path) async {
+    String text = "";
+    try {
+      text = await ReadPdfText.getPDFtext(path);
+    } on PlatformException {
+      print('Failed to get PDF text.');
+    }
+    return text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,30 +84,47 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 39, 39, 39),
+        backgroundColor: const Color.fromARGB(255, 39, 39, 39),
         title: Text(name),
         actions: pages >= 2
             ? [
                 Center(child: Text(text)),
                 IconButton(
-                  icon: Icon(Icons.chevron_left, size: 32),
+                  icon: const Icon(Icons.chevron_left, size: 32),
                   onPressed: () {
                     final page = indexPage == 0 ? pages : indexPage - 1;
                     controller.setPage(page);
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.chevron_right, size: 32),
+                  icon: const Icon(Icons.chevron_right, size: 32),
                   onPressed: () {
                     final page = indexPage == pages - 1 ? 0 : indexPage + 1;
                     controller.setPage(page);
                   },
                 ),
-                IconButton(
-                    onPressed: () => extrator(), icon: Icon(Icons.volume_up))
               ]
             : null,
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 39, 39, 39),
+        child: isPlay ? const Icon(Icons.pause) : const Icon(Icons.volume_up),
+        onPressed: () {
+          setState(() {
+            if (isStart) {
+              isPlay = true;
+            }
+            print("settttttjnkjf bfkjd ");
+            print(isPlay);
+          });
+          extrator();
+          if (!isStart) {
+            isPlay = !isPlay;
+          }
+        },
+      ),
+      // IconButton(
+      //     onPressed: () => extrator(), icon: const Icon(Icons.volume_up)),
       body: UCPDFView(
         filePath: widget.file.path,
         // autoSpacing: false,
@@ -71,32 +139,34 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
       ),
     );
   }
+  //===============================================================
 
   // ==================================================================
 
-  extrator() async {
-    PdfDocument document =
-        PdfDocument(inputBytes: await _readDocumentData('assets/sample.pdf'));
-    PdfTextExtractor extractor = PdfTextExtractor(document);
-    String text = extractor.extractText();
-    print(text);
+  // extrator() async {
+  //   PdfDocument document =
+  //       PdfDocument(inputBytes: await _readDocumentData('assets/sample.pdf'));
+  //   PdfTextExtractor extractor = PdfTextExtractor(document);
+  //   String text = extractor.extractText();
+  //   print(text);
 
-    TextToSpeech tts = TextToSpeech();
-    double volume = 1.0;
-    await tts.setVolume(volume);
-    // await tts.pause();
+  //   TextToSpeech tts = TextToSpeech();
+  //   double volume = 1.0;
+  //   await tts.setVolume(volume);
+  //   // await tts.pause();
 
-    String language = 'en-US';
-    await tts.setLanguage(language);
-    // tts.stop();
-    await tts.speak(text);
-  }
+  //   String language = 'en-US';
+  //   await tts.setLanguage(language);
+  //   await tts.getVoiceByLang(language);
+  //   // tts.stop();
+  //   await tts.speak(text);
+  // }
 
-  Future<List<int>> _readDocumentData(String name) async {
-    // final ByteData data = await rootBundle.load(name);
-    final ByteData data = await rootBundle.load(name);
-    return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-  }
+  // Future<List<int>> _readDocumentData(String name) async {
+  //   // final ByteData data = await rootBundle.load(name);
+  //   final ByteData data = await rootBundle.load(name);
+  //   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  // }
 
   //===============================================================
 
