@@ -44,10 +44,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
       String language = 'en-US';
       await tts.setLanguage(language);
       // await tts.getVoiceByLang(language);
-      await tts.setVoice({
-        //'Voice1' : 'en-us-x-sfg#female_1-local',
-        'Voice2': 'en-us-x-sfg#male_1-local'
-      });
+      await tts.setVoice({"name": "Karen", "locale": "en-AU"});
       // tts.stop();
       isStart = false;
       await tts.speak(text);

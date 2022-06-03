@@ -8,7 +8,7 @@ import 'package:pdf_viewer/page/homePage.dart';
 // import 'package:pdf_viewer/page/pdf_viewer_example.dart';
 import 'package:pdf_viewer/page/profilePage.dart';
 
-import 'api/pdf_api.dart';
+// import 'api/pdf_api.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
