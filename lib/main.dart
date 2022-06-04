@@ -49,8 +49,9 @@ class _MainPageState extends State<MainPage> {
         body: pages[currentindex],
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentindex,
-            backgroundColor: Color.fromARGB(255, 39, 39, 39),
-            unselectedItemColor: Colors.white70,
+            backgroundColor: Color.fromARGB(255, 0, 128, 167),
+            selectedItemColor: Color.fromARGB(255, 255, 255, 255),
+            unselectedItemColor: Color.fromARGB(131, 251, 255, 251),
             onTap: (index) => setState(() => currentindex = index),
             items: const [
               BottomNavigationBarItem(

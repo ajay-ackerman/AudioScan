@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(MyApp.title),
+          title: const Text("Audio to Text"),
           centerTitle: true,
           actions: [
             Builder(
@@ -34,6 +34,9 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+            Builder(
+                builder: (context) => IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.picture_as_pdf)))
           ],
         ),
         body: SingleChildScrollView(

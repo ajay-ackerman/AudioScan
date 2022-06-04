@@ -1,31 +1,3 @@
-// // import 'dart:io';
-
-// // import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-
-// class Audio_pdf extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) => Scaffold(
-//         appBar: AppBar(
-//           title: Text("Audio to PDF"),
-//           backgroundColor: Color.fromARGB(255, 39, 39, 39),
-//         ),
-//         body: Container(
-//           color: Color.fromARGB(255, 148, 148, 148),
-//           child: Icon(Icons.mic),
-//         ),
-//       );
-//       static final String title = 'Speech to Text';
-
-//   @override
-//   Widget build(BuildContext context) => MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         title: title,
-//         theme: ThemeData(primarySwatch: Colors.purple),
-//         home: HomePage(),
-//       );
-// }
-
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';

@@ -16,13 +16,14 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("AUDIOSCAN"),
-          backgroundColor: Color.fromARGB(255, 39, 39, 39),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 0, 128, 167),
         ),
         body: Container(
-          color: Color.fromARGB(255, 148, 148, 148),
+          color: Color.fromARGB(199, 198, 240, 253),
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: Color.fromARGB(255, 39, 39, 39),
+            backgroundColor: Color.fromARGB(255, 0, 128, 167),
             onPressed: () async {
               final file = await PDFApi.pickFile();
               if (file == null) return;
