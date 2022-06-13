@@ -74,6 +74,12 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     return text;
   }
 
+  // ignore: non_constant_identifier_names
+  translate() async {
+    // final translator = GoogleTranslator();
+    // translator.translate(text, from: 'ru', to: 'en').then(print);
+  }
+
   @override
   Widget build(BuildContext context) {
     final name = basename(widget.file.path);
@@ -99,6 +105,10 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                     final page = indexPage == pages - 1 ? 0 : indexPage + 1;
                     controller.setPage(page);
                   },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.translate, size: 32),
+                  onPressed: translate,
                 ),
               ]
             : null,

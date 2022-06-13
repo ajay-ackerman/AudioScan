@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 0, 128, 167),
         ),
         body: Container(
-          color: Color.fromARGB(199, 198, 240, 253),
+          color: Color.fromARGB(224, 223, 243, 249),
         ),
         floatingActionButton: FloatingActionButton(
             backgroundColor: Color.fromARGB(255, 0, 128, 167),

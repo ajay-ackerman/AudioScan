@@ -13,34 +13,35 @@ class Utils {
   static void scanText(String rawText) {
     final text = rawText.toLowerCase();
 
-    //   if (text.contains(Command.email)) {
-    //     final body = _getTextAfterCommand(text: text, command: Command.email);
+    if (text.contains(Command.enter)) {
+      text.endsWith("\n");
+      // final body = (text: text, command: Command.email);
 
-    //     openEmail(body: body);
-    //   } else if (text.contains(Command.browser1)) {
-    //     final url = _getTextAfterCommand(text: text, command: Command.browser1);
+      //     openEmail(body: body);
+      //   } else if (text.contains(Command.browser1)) {
+      //     final url = _getTextAfterCommand(text: text, command: Command.browser1);
 
-    //     openLink(url: url);
-    //   } else if (text.contains(Command.browser2)) {
-    //     final url = _getTextAfterCommand(text: text, command: Command.browser2);
+      //     openLink(url: url);
+      //   } else if (text.contains(Command.browser2)) {
+      //     final url = _getTextAfterCommand(text: text, command: Command.browser2);
 
-    //     openLink(url: url);
-    //   }
-    // }
+      //     openLink(url: url);
+      //   }
+      // }
 
-    // static String _getTextAfterCommand({
-    //   required String text,
-    //   required String command,
-    // }) {
-    //   final indexCommand = text.indexOf(command);
-    //   final indexAfter = indexCommand + command.length;
+      // static String _getTextAfterCommand({
+      //   required String text,
+      //   required String command,
+      // }) {
+      //   final indexCommand = text.indexOf(command);
+      //   final indexAfter = indexCommand + command.length;
 
-    //   if (indexCommand == -1) {
-    //     return null;
-    //   } else {
-    //     return text.substring(indexAfter).trim();
-    //   }
-    // }
+      //   if (indexCommand == -1) {
+      //     return null;
+      //   } else {
+      //     return text.substring(indexAfter).trim();
+      //   }
+      // }
 
 //   static Future openLink({
 //     required String url,
@@ -63,5 +64,6 @@ class Utils {
 //     if (await canLaunch(url)) {
 //       await launch(url);
 //     }
+    }
   }
 }

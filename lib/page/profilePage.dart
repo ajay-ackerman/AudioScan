@@ -7,7 +7,8 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Profile"),
-          backgroundColor: Color.fromARGB(255, 39, 39, 39),
+          backgroundColor: Color.fromARGB(255, 0, 128, 167),
+          centerTitle: true,
         ),
         body: Container(
           color: Color.fromARGB(255, 148, 148, 148),

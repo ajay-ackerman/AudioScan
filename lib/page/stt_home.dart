@@ -5,7 +5,7 @@ import 'package:pdf_viewer/api/speech_api.dart';
 import 'package:pdf_viewer/main.dart';
 import 'package:pdf_viewer/widget/substring_highlighted.dart';
 
-import 'package:pdf_viewer/page/utils.dart';
+// import 'package:pdf_viewer/page/utils.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,20 +42,20 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           reverse: true,
           padding: const EdgeInsets.all(30).copyWith(bottom: 150),
-          child: SubstringHighlight(
-            text: text,
-            terms: Command.all,
-            textStyle: TextStyle(
-              fontSize: 32.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-            ),
-            textStyleHighlight: TextStyle(
-              fontSize: 32.0,
-              color: Colors.red,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          // child: SubstringHighlight(
+          //   text: text,
+          //   terms: Command.all,
+          //   textStyle: TextStyle(
+          //     fontSize: 32.0,
+          //     color: Colors.black,
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          //   textStyleHighlight: TextStyle(
+          //     fontSize: 32.0,
+          //     color: Colors.red,
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          // ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: AvatarGlow(
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
           if (!isListening) {
             Future.delayed(Duration(seconds: 1), () {
-              Utils.scanText(text);
+              // Utils.scanText(text);
             });
           }
         },

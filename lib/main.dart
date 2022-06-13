@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(
-          primaryColor: Color.fromARGB(255, 124, 25, 245),
+          primaryColor: Colors.deepPurple,
+          // fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
         ),
         home: MainPage(),
       );
