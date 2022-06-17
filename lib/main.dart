@@ -1,14 +1,14 @@
-// import 'dart:io';
+import 'dart:io';
 
-// import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf_viewer/page/audio_to_pdf_page.dart';
 import 'package:pdf_viewer/page/homePage.dart';
-// import 'package:pdf_viewer/page/pdf_viewer_example.dart';
+import 'package:pdf_viewer/page/pdf_viewer_example.dart';
 import 'package:pdf_viewer/page/profilePage.dart';
 
-// import 'api/pdf_api.dart';
+import 'api/pdf_api.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'PDF Viewer';
+  static final String title = 'AudioScan';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         title: title,
         theme: ThemeData(
           primaryColor: Colors.deepPurple,
-          // fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
+          fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
         ),
         home: MainPage(),
       );

@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer/api/speech_api.dart';
-import 'package:pdf_viewer/main.dart';
+// import 'package:pdf_viewer/main.dart';
 import 'package:pdf_viewer/widget/substring_highlighted.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -42,7 +43,8 @@ class _HomePageState extends State<Audio_pdf> {
             ),
             Builder(
                 builder: (context) => IconButton(
-                    onPressed: createPdf, icon: Icon(Icons.picture_as_pdf))),
+                    onPressed: createPdf,
+                    icon: const Icon(Icons.picture_as_pdf))),
           ],
         ),
         body: Center(
@@ -94,18 +96,50 @@ class _HomePageState extends State<Audio_pdf> {
 
   createPdf() async {
     final pdf = pw.Document();
-
+    final font = await rootBundle.load("assets/fonts/Cardo-Italic.ttf");
+    final ttf = pw.Font.ttf(font);
     pdf.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Center(
-            child: pw.Text(text),
+            child: pw.Text(
+              text,
+              style: pw.TextStyle(
+                font: ttf,
+              ),
+              //child: pw.Text('Dart is awesome', style: TextStyle(font: ttf, fontSize: 40)),
+            ),
           ); // Center
         }));
 
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/example.pdf");
+// ==========================================================================
+    // final output = await getTemporaryDirectory();
+    // final output = await getExternalStorageDirectory();
+    // print("===============================");
+    // print(output);
+    // final file = File("${output?.path}/example.pdf");
+    // String path = await getExternalStorageDirectory().getPath();
 
-    await file.writeAsBytes(await pdf.save());
+    //====================================
+    // Future<Directory?> getExternalStorageDirectory() async {
+    // final String? path = await _platform.getExternalStoragePath();
+    // if (path == null) {
+    //   return null;
+    // }
+    // return Directory(path);
+    // }
+
+    //=================
+    // String myJpgPath = path.toString() + "/Download/" + text[5] + ".pdf";
+
+    // final file = File(myJpgPath);
+
+    // await file.writeAsBytes(await pdf.save());
+    //==========================================================
+    // final output = await getExternalStorageDirectory();
+    // print("===============================");
+    // print(output);
+    // final file = File("${output?.path}/example.pdf");
+    // await file.writeAsBytes(await pdf.save());
   }
 }

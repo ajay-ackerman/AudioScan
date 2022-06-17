@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
 // import 'package:pdf_text/pdf_text.dart';
 import 'package:read_pdf_text/read_pdf_text.dart';
 // import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:text_to_speech/text_to_speech.dart';
+import 'package:translator/translator.dart';
 import 'package:uc_pdfview/uc_pdfview.dart';
 
 class PDFViewerPage extends StatefulWidget {
@@ -75,11 +78,68 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   }
 
   // ignore: non_constant_identifier_names
-  translate() async {
-    // final translator = GoogleTranslator();
-    // translator.translate(text, from: 'ru', to: 'en').then(print);
+  translate(String code) async {
+    text = await getPDFtext(widget.file.path) as String;
+    final translator = GoogleTranslator();
+
+    //------ translator.translate(text, from: 'ru', to: 'en').then(print);
+    // prints Hello. Are you okay?
+
+    var translation = await translator.translate(text, to: code);
+    createDialog(translation.toString());
+    print(translation);
+    // prints Dart jest bardzo fajny!
+
+    // ----print(await "example".translate(to: 'pt'));
+    // prints exemplo
   }
 
+  createDialog(String translatedText) {
+    // SimpleDialog(
+    //   title: const Text('Translated Text'),
+    //   children: <Widget>[
+    //     SimpleDialogOption(
+    //       onPressed: () {},
+    //       child: Text(translatedText),
+    //     )
+    //   ],
+    // );
+    showDialog(
+        context: this.context,
+        builder: (context) => AlertDialog(
+              title: Text(
+                  'Translated Text'), // To display the title it is optional
+              content: Text(
+                  translatedText), // Message which will be pop up on the screen
+              // Action widget which will provide the user to acknowledge the choice
+              actions: [
+                IconButton(
+                  // FlatButton widget is used to make a text to work like a button
+                  icon: Icon(Icons.copy),
+                  onPressed: () async {
+                    // await FlutterClipboard.copy(translatedText);
+                    // Scaffold.of(context).showSnackBar(
+                    //   SnackBar(content: Text('✓   Copied to Clipboard')),
+                    // );
+                    Fluttertoast.showToast(
+                        msg: "✔ copied",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Color.fromARGB(37, 49, 49, 49),
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.picture_as_pdf),
+                  onPressed: () {},
+                ),
+              ],
+            ));
+  }
+
+  late int? value;
   @override
   Widget build(BuildContext context) {
     final name = basename(widget.file.path);
@@ -106,10 +166,36 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                     controller.setPage(page);
                   },
                 ),
-                IconButton(
-                  icon: const Icon(Icons.translate, size: 32),
-                  onPressed: translate,
+                DropdownButton(
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("Eng"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Hin"),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Ger"),
+                      value: 3,
+                    ),
+                  ],
+                  onChanged: (value) => setState(() {
+                    this.value = value as int?;
+                    if (value == 1) {
+                      translate('en');
+                    } else if (value == 2) {
+                      translate('hi');
+                    } else {
+                      translate('de');
+                    }
+                  }),
                 ),
+                // IconButton(
+                //   icon: const Icon(Icons.translate, size: 32),
+                //   onPressed: translate,
+                // ),
               ]
             : null,
       ),
@@ -146,6 +232,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
       ),
     );
   }
+
   //===============================================================
 
   // ==================================================================
@@ -195,4 +282,5 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
 
 //     await tts.speak(docText);
 //   }
+
 }

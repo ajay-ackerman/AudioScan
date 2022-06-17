@@ -2,6 +2,7 @@ import 'dart:io';
 
 // import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 // import 'package:flutter/services.dart';
 // import 'package:flutter/widgets.dart';
 // import 'package:path_provider/path_provider.dart';
@@ -20,7 +21,14 @@ class Home extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 0, 128, 167),
         ),
         body: Container(
-          color: Color.fromARGB(224, 223, 243, 249),
+          color: Color.fromARGB(223, 251, 254, 255),
+          child: Center(
+              child: Lottie.network(
+            'https://assets10.lottiefiles.com/packages/lf20_7fmryqpe.json',
+            height: 250,
+            alignment: Alignment.center,
+            fit: BoxFit.fitWidth,
+          )),
         ),
         floatingActionButton: FloatingActionButton(
             backgroundColor: Color.fromARGB(255, 0, 128, 167),
