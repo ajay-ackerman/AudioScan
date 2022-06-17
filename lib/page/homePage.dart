@@ -19,6 +19,12 @@ class Home extends StatelessWidget {
           title: Text("AUDIOSCAN"),
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 0, 128, 167),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.merge, size: 32),
+              onPressed: () {},
+            ),
+          ],
         ),
         body: Container(
           color: Color.fromARGB(223, 251, 254, 255),

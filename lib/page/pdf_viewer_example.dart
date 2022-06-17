@@ -40,8 +40,6 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   extrator() async {
     if (isStart) {
       text = await getPDFtext(widget.file.path) as String;
-      // TextEditingController ttscontroller = TextEditingController(text: text);
-
       print(text);
       await tts.setVolume(volume);
       String language = 'en-US';
