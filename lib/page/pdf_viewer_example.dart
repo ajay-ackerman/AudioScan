@@ -9,10 +9,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 // import 'package:pdf_text/pdf_text.dart';
 import 'package:read_pdf_text/read_pdf_text.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 // import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 import 'package:translator/translator.dart';
 import 'package:uc_pdfview/uc_pdfview.dart';
+
+import 'mobile.dart';
 
 class PDFViewerPage extends StatefulWidget {
   final File file;
@@ -28,6 +31,7 @@ class PDFViewerPage extends StatefulWidget {
 
 class _PDFViewerPageState extends State<PDFViewerPage> {
   late PDFViewController controller;
+  late String translatedtext;
   late String text;
   // TextToSpeech tts = TextToSpeech();
   final FlutterTts tts = FlutterTts();
@@ -92,16 +96,19 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     // prints exemplo
   }
 
+  createPdf() async {
+    PdfDocument document = PdfDocument();
+    final page = document.pages.add();
+
+    page.graphics.drawString(
+        translatedtext, PdfStandardFont(PdfFontFamily.helvetica, 15));
+    List<int> bytes = document.save();
+    document.dispose();
+    saveAndLaunchFile(bytes, (text.substring(0, 5) + ".pdf"));
+  }
+
   createDialog(String translatedText) {
-    // SimpleDialog(
-    //   title: const Text('Translated Text'),
-    //   children: <Widget>[
-    //     SimpleDialogOption(
-    //       onPressed: () {},
-    //       child: Text(translatedText),
-    //     )
-    //   ],
-    // );
+    translatedtext = translatedText;
     showDialog(
         context: this.context,
         builder: (context) => AlertDialog(
@@ -131,7 +138,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                 ),
                 IconButton(
                   icon: Icon(Icons.picture_as_pdf),
-                  onPressed: () {},
+                  onPressed: createPdf,
                 ),
               ],
             ));
