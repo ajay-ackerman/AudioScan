@@ -81,7 +81,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
 
   // ignore: non_constant_identifier_names
   translate(String code) async {
-    text = await getPDFtext(widget.file.path) as String;
+    text = await getPDFtext(widget.file.path);
     final translator = GoogleTranslator();
 
     //------ translator.translate(text, from: 'ru', to: 'en').then(print);
@@ -112,10 +112,11 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     showDialog(
         context: this.context,
         builder: (context) => AlertDialog(
-              title: Text(
+              title: const Text(
                   'Translated Text'), // To display the title it is optional
-              content: Text(
-                  translatedText), // Message which will be pop up on the screen
+              content: SingleChildScrollView(
+                  child: Text(
+                      translatedText)), // Message which will be pop up on the screen
               // Action widget which will provide the user to acknowledge the choice
               actions: [
                 IconButton(
@@ -131,13 +132,13 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Color.fromARGB(37, 49, 49, 49),
+                        backgroundColor: const Color.fromARGB(37, 49, 49, 49),
                         textColor: Colors.white,
                         fontSize: 16.0);
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.picture_as_pdf),
+                  icon: const Icon(Icons.picture_as_pdf),
                   onPressed: createPdf,
                 ),
               ],
@@ -152,26 +153,30 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 39, 39, 39),
+        backgroundColor: const Color.fromARGB(255, 0, 128, 167),
         title: Text(name),
         actions: pages >= 2
             ? [
                 Center(child: Text(text)),
-                IconButton(
-                  icon: const Icon(Icons.chevron_left, size: 32),
-                  onPressed: () {
-                    final page = indexPage == 0 ? pages : indexPage - 1;
-                    controller.setPage(page);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_right, size: 32),
-                  onPressed: () {
-                    final page = indexPage == pages - 1 ? 0 : indexPage + 1;
-                    controller.setPage(page);
-                  },
-                ),
+                // IconButton(
+                //   icon: const Icon(Icons.chevron_left, size: 32),
+                //   onPressed: () {
+                //     final page = indexPage == 0 ? pages : indexPage - 1;
+                //     controller.setPage(page);
+                //   },
+                // ),
+                // IconButton(
+                //   icon: const Icon(Icons.chevron_right, size: 32),
+                //   onPressed: () {
+                //     final page = indexPage == pages - 1 ? 0 : indexPage + 1;
+                //     controller.setPage(page);
+                //   },
+                // ),
                 DropdownButton(
+                  icon: const Icon(
+                    Icons.translate,
+                    color: Colors.white,
+                  ),
                   items: const [
                     DropdownMenuItem(
                       child: Text("Eng"),
@@ -202,10 +207,41 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                 //   onPressed: translate,
                 // ),
               ]
-            : null,
+            : [
+                DropdownButton(
+                  icon: const Icon(
+                    Icons.translate,
+                    color: Colors.white,
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("Eng"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Hin"),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Ger"),
+                      value: 3,
+                    ),
+                  ],
+                  onChanged: (value) => setState(() {
+                    this.value = value as int?;
+                    if (value == 1) {
+                      translate('en');
+                    } else if (value == 2) {
+                      translate('hi');
+                    } else {
+                      translate('de');
+                    }
+                  }),
+                ),
+              ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 39, 39, 39),
+        backgroundColor: const Color.fromARGB(255, 0, 128, 167),
         child: isPlay ? const Icon(Icons.pause) : const Icon(Icons.volume_up),
         onPressed: () {
           setState(() {

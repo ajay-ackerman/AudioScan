@@ -20,10 +20,11 @@ class Home extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 0, 128, 167),
           actions: [
-            // IconButton(
-            //   icon: const Icon(Icons.merge, size: 32),
-            //   onPressed: () {},
-            // ),
+            IconButton(
+              icon: const Icon(Icons.info, size: 20),
+              color: Colors.white,
+              onPressed: () {},
+            ),
           ],
         ),
         body: Container(

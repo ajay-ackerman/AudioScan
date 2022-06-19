@@ -42,7 +42,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 void main() {
   runApp(
     const MaterialApp(
-      title: 'Google Sign In',
+      title: 'Sign In',
       home: Profile(),
     ),
   );
