@@ -81,7 +81,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
 
   // ignore: non_constant_identifier_names
   translate(String code) async {
-    text = await getPDFtext(widget.file.path);
+    text = await getPDFtext(widget.file.path) as String;
     final translator = GoogleTranslator();
 
     //------ translator.translate(text, from: 'ru', to: 'en').then(print);
@@ -121,7 +121,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
               actions: [
                 IconButton(
                   // FlatButton widget is used to make a text to work like a button
-                  icon: Icon(Icons.copy),
+                  icon: const Icon(Icons.copy),
                   onPressed: () async {
                     // await FlutterClipboard.copy(translatedText);
                     // Scaffold.of(context).showSnackBar(

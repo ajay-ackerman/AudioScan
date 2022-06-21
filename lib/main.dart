@@ -23,7 +23,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'AudioScan';
+  static const String title = 'AudioScan';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
