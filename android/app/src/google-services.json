@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "906465065732",
+    "project_id": "audio-scan-6b407",
+    "storage_bucket": "audio-scan-6b407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906465065732:android:db25c99ac27481bd562e51",
+        "android_client_info": {
+          "package_name": "com.example.pdf_viewer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906465065732-4vmfoiq1bc3lkuaeq0205ah22770j9ev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pdf_viewer",
+            "certificate_hash": "02a9ecec21ee3201014800fa6e150b07aabf4580"
+          }
+        },
+        {
+          "client_id": "906465065732-opih1me20g2gobu5elt7kb9bakgsa8d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBWEXngqttGuZAXNM3LieSh7iZELbHjWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906465065732-opih1me20g2gobu5elt7kb9bakgsa8d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

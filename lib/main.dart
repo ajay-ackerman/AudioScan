@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,12 +8,14 @@ import 'package:pdf_viewer/page/audio_to_pdf_page.dart';
 import 'package:pdf_viewer/page/homePage.dart';
 import 'package:pdf_viewer/page/pdf_viewer_example.dart';
 import 'package:pdf_viewer/page/profilePage.dart';
+import 'package:pdf_viewer/page/signup.dart';
 
 import 'api/pdf_api.dart';
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -28,6 +31,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        routes: <String, WidgetBuilder>{
+          '/signup': (BuildContext context) => SignupPage()
+        },
         title: title,
         theme: ThemeData(
           primaryColor: Colors.deepPurple,
@@ -44,7 +50,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentindex = 1;
-  final pages = [Audio_pdf(), Home(), Profile()];
+  final pages = [
+    Audio_pdf(),
+    Home(),
+    const Profile(
+      title: 'Welcome',
+    )
+  ];
   @override
   Widget build(BuildContext context) => Scaffold(
         body: pages[currentindex],
