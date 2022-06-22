@@ -67,11 +67,11 @@ class Home extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (context) => AlertDialog(
+                    builder: (context) => const AlertDialog(
                           // To display the title it is optional
                           content: SingleChildScrollView(
                               child: Text(
-                                  "About PDF to Audio")), // Message which will be pop up on the screen
+                                  " Just drop your pdf files on the page to convert into audio")), // Message which will be pop up on the screen
                           // Action widget which will provide the user to acknowledge the choice
                         ));
               },
@@ -87,11 +87,11 @@ class Home extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (context) => AlertDialog(
+                    builder: (context) => const AlertDialog(
                           // To display the title it is optional
                           content: SingleChildScrollView(
                               child: Text(
-                                  "About Audio to PDF")), // Message which will be pop up on the screen
+                                  "Speech to text converter is powerful tool to convert speech or voice to text and save as pdf file.")), // Message which will be pop up on the screen
                           // Action widget which will provide the user to acknowledge the choice
                         ));
               },
@@ -111,7 +111,7 @@ class Home extends StatelessWidget {
                           // To display the title it is optional
                           content: SingleChildScrollView(
                               child: Text(
-                                  "About the translater")), // Message which will be pop up on the screen
+                                  "Language Translator translates PDF into different languages and makes Pdf of translated text")), // Message which will be pop up on the screen
                           // Action widget which will provide the user to acknowledge the choice
                         ));
               },

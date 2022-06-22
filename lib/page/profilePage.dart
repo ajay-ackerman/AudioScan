@@ -187,6 +187,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pdf_viewer/page/homePage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -224,12 +225,26 @@ class _ProfileState extends State<Profile> {
       setState(() {
         _success = 2;
         _userEmail = user.email!;
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) => Home()));
       });
     } else {
       setState(() {
         _success = 3;
       });
     }
+    Fluttertoast.showToast(
+        msg: _success == 1
+            ? ''
+            : (_success == 2
+                ? 'Successfully signed in ' + _userEmail
+                : 'Sign in failed'),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: const Color.fromARGB(37, 49, 49, 49),
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   @override
@@ -308,7 +323,8 @@ class _ProfileState extends State<Profile> {
                         : (_success == 2
                             ? 'Successfully signed in ' + _userEmail
                             : 'Sign in failed'),
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 128, 167)),
                   )),
               const SizedBox(
                 height: 40,
