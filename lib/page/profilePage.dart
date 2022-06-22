@@ -187,6 +187,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pdf_viewer/page/homePage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -314,21 +315,22 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 height: 40,
-                child: Material(
-                  borderRadius: BorderRadius.circular(20),
-                  shadowColor: Colors.greenAccent,
-                  color: Colors.black,
-                  elevation: 7,
-                  child: GestureDetector(
-                      onTap: () async {
-                        _singIn();
-                      },
-                      child: const Center(
-                          child: const Text('LOGIN',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat')))),
+
+                // child: GestureDetector(
+                //     onTap: () async {
+                //       _singIn();
+                //     },
+                //     child: const Center(
+                //         child: const Text('LOGIN',
+                //             style: const TextStyle(
+                //                 color: Colors.white,
+                //                 fontWeight: FontWeight.bold,
+                //                 fontFamily: 'Montserrat')))),
+                child: RaisedButton(
+                  onPressed: _singIn,
+                  color: Color.fromARGB(255, 0, 128, 167),
+                  child: Text("LOGIN"),
+                  textColor: Colors.white,
                 ),
               ),
               const SizedBox(
@@ -341,7 +343,7 @@ class _ProfileState extends State<Profile> {
                     onTap: () {
                       Navigator.of(context).pushNamed('/signup');
                     },
-                    child: const Text('Register',
+                    child: const Text('\n\nRegister',
                         style: const TextStyle(
                             color: Colors.blueGrey,
                             fontFamily: 'Montserrat',

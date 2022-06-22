@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 // import 'package:file_picker/file_picker.dart';
@@ -33,108 +35,112 @@ class Home extends StatelessWidget {
           ],
         ),
         body: Stack(children: [
-          Container(
-            color: Color.fromARGB(223, 251, 254, 255),
-            child: Center(
-                child: Lottie.network(
-              'https://assets10.lottiefiles.com/packages/lf20_7fmryqpe.json',
-              addRepaintBoundary: true,
-              height: 250,
-              alignment: Alignment.center,
-              fit: BoxFit.fitWidth,
-            )),
-          ),
-          const Positioned(
-            top: 10,
-            left: 120,
-            child: Text(
-              "shrt notes about audioScan ",
-              style: TextStyle(color: Colors.black, fontSize: 20),
-            ),
-          ),
           Positioned(
-            top: 270,
-            left: 130,
-            child: Center(
-              child: Container(
-                color: Color.fromARGB(197, 255, 255, 255),
-                child: DropdownButton(
-                  value: "",
-                  icon: const Icon(Icons.arrow_drop_down_sharp),
-                  items: const [
-                    DropdownMenuItem(
-                      child: Text(
-                        "• Audio to pdf",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      value: "",
-                    ),
-                    DropdownMenuItem(
-                      child: Text("about audio to pdf",
-                          style: TextStyle(color: Colors.blue)),
-                      value: " ",
-                    ),
-                  ],
-                  onChanged: (String? value) {},
-                ),
+            top: 350,
+            left: 80,
+            child: Container(
+              color: Color.fromARGB(223, 251, 254, 255),
+              child: Lottie.network(
+                'https://assets10.lottiefiles.com/packages/lf20_7fmryqpe.json',
+                addRepaintBoundary: true,
+                height: 250,
+                alignment: Alignment.center,
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
-          Positioned(
-            top: 330,
-            left: 130,
-            child: Container(
-                color: Color.fromARGB(197, 255, 255, 255),
-                child: DropdownButton(
-                  focusColor: Colors.black,
-                  value: "",
-                  icon: const Icon(Icons.arrow_drop_down_sharp),
-                  items: const [
-                    DropdownMenuItem(
-                      child: Text(
-                        "• PDF to Udio",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      value: "",
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "about audio to pdf",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      value: " ",
-                    ),
-                  ],
-                  onChanged: (String? value) {},
-                )),
+          const Positioned(
+            top: 40,
+            left: 50,
+            child: Text(
+              "WELCOME TO AUDIO SCAN ",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 0, 128, 167), fontSize: 20),
+            ),
           ),
           Positioned(
-            top: 390,
+            top: 100,
+            left: 114,
+            child: RaisedButton(
+              color: Color.fromARGB(255, 0, 128, 167),
+              textColor: Colors.white,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          // To display the title it is optional
+                          content: SingleChildScrollView(
+                              child: Text(
+                                  "About PDF to Audio")), // Message which will be pop up on the screen
+                          // Action widget which will provide the user to acknowledge the choice
+                        ));
+              },
+              child: Text("• About PDF to Audio"),
+            ),
+          ),
+          Positioned(
+            top: 150,
+            left: 115,
+            child: RaisedButton(
+              color: Color.fromARGB(255, 0, 128, 167),
+              textColor: Colors.white,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          // To display the title it is optional
+                          content: SingleChildScrollView(
+                              child: Text(
+                                  "About Audio to PDF")), // Message which will be pop up on the screen
+                          // Action widget which will provide the user to acknowledge the choice
+                        ));
+              },
+              child: Text("• About Audio to PDF"),
+            ),
+          ),
+          Positioned(
+            top: 200,
             left: 130,
-            child: Container(
-                color: Color.fromARGB(197, 255, 255, 255),
-                child: DropdownButton(
-                  focusColor: Colors.black,
-                  value: "",
-                  icon: const Icon(Icons.arrow_drop_down_sharp),
-                  items: const [
-                    DropdownMenuItem(
-                      child: Text(
-                        "• Translate ",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      value: "",
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "about PDF translater",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      value: " ",
-                    ),
-                  ],
-                  onChanged: (String? value) {},
-                )),
+            child: RaisedButton(
+              color: Color.fromARGB(255, 0, 128, 167),
+              textColor: Colors.white,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          // To display the title it is optional
+                          content: SingleChildScrollView(
+                              child: Text(
+                                  "About the translater")), // Message which will be pop up on the screen
+                          // Action widget which will provide the user to acknowledge the choice
+                        ));
+              },
+              child: Text("• About Translate"),
+            ),
+            // child: Container(
+            //     color: Color.fromARGB(197, 255, 255, 255),
+            //     child: DropdownButton(
+            //       focusColor: Colors.black,
+            //       value: "",
+            //       icon: const Icon(Icons.arrow_drop_down_sharp),
+            //       items: const [
+            //         DropdownMenuItem(
+            //           child: Text(
+            //             "• Translate ",
+            //             style: TextStyle(fontSize: 20),
+            //           ),
+            //           value: "",
+            //         ),
+            //         DropdownMenuItem(
+            //           child: Text(
+            //             "about PDF translater",
+            //             style: TextStyle(color: Colors.blue),
+            //           ),
+            //           value: " ",
+            //         ),
+            //       ],
+            //       onChanged: (String? value) {},
+            //     )),
           ),
         ]),
         floatingActionButton: FloatingActionButton(
