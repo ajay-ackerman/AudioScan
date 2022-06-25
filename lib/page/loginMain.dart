@@ -188,12 +188,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pdf_viewer/main.dart';
 import 'package:pdf_viewer/page/homePage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key, required this.title}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -207,10 +208,10 @@ class Profile extends StatefulWidget {
   final String title;
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Login> createState() => _LoginState();
 }
 
-class _ProfileState extends State<Profile> {
+class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   int _success = 1;
@@ -225,8 +226,8 @@ class _ProfileState extends State<Profile> {
       setState(() {
         _success = 2;
         _userEmail = user.email!;
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) => Home()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => MainPage()));
       });
     } else {
       setState(() {
@@ -258,10 +259,16 @@ class _ProfileState extends State<Profile> {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.fromLTRB(15, 110, 0, 0),
-                child: const Text("Hello User",
-                    style:
-                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-              )
+                child: const Text(
+                  "Hello User , Welcome to AudioScan",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 128, 167),
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
@@ -278,7 +285,8 @@ class _ProfileState extends State<Profile> {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 0, 128, 167)),
                     )),
               ),
               const SizedBox(
@@ -293,7 +301,8 @@ class _ProfileState extends State<Profile> {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 0, 128, 167)),
                     )),
                 obscureText: true,
               ),

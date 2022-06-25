@@ -7,12 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:pdf_viewer/page/audio_to_pdf_page.dart';
 import 'package:pdf_viewer/page/homePage.dart';
 import 'package:pdf_viewer/page/pdf_viewer_example.dart';
-import 'package:pdf_viewer/page/profilePage.dart';
+import 'package:pdf_viewer/page/loginMain.dart';
 import 'package:pdf_viewer/page/signup.dart';
 
 import 'api/pdf_api.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -39,7 +40,9 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.deepPurple,
           fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
         ),
-        home: MainPage(),
+        home: const Login(
+          title: '',
+        ),
       );
 }
 
@@ -53,7 +56,7 @@ class _MainPageState extends State<MainPage> {
   final pages = [
     Audio_pdf(),
     Home(),
-    const Profile(
+    const Login(
       title: 'Welcome',
     )
   ];
