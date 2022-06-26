@@ -8,6 +8,7 @@ import 'package:pdf_viewer/page/audio_to_pdf_page.dart';
 import 'package:pdf_viewer/page/homePage.dart';
 import 'package:pdf_viewer/page/pdf_viewer_example.dart';
 import 'package:pdf_viewer/page/loginMain.dart';
+import 'package:pdf_viewer/page/profilepPage.dart';
 import 'package:pdf_viewer/page/signup.dart';
 
 import 'api/pdf_api.dart';
@@ -28,22 +29,28 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   static const String title = 'AudioScan';
+  late bool islogin;
+
+  isLogged() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return MainPage();
+    } else {
+      return Login();
+    }
+  }
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: <String, WidgetBuilder>{
-          '/signup': (BuildContext context) => SignupPage()
-        },
-        title: title,
-        theme: ThemeData(
-          primaryColor: Colors.deepPurple,
-          fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
-        ),
-        home: const Login(
-          title: '',
-        ),
-      );
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        '/signup': (BuildContext context) => SignupPage()
+      },
+      title: title,
+      theme: ThemeData(
+        primaryColor: Colors.deepPurple,
+        fontFamily: 'Cardo', //Color.fromARGB(255, 124, 25, 245),
+      ),
+      home: isLogged());
 }
 
 class MainPage extends StatefulWidget {
@@ -53,13 +60,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentindex = 1;
-  final pages = [
-    Audio_pdf(),
-    Home(),
-    const Login(
-      title: 'Welcome',
-    )
-  ];
+  final pages = [Audio_pdf(), Home(), Profile()];
   @override
   Widget build(BuildContext context) => Scaffold(
         body: pages[currentindex],

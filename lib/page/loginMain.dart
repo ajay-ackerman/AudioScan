@@ -183,18 +183,19 @@
 //   }
 // }
 
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pdf_viewer/main.dart';
 import 'package:pdf_viewer/page/homePage.dart';
+import 'package:pdf_viewer/page/profilepPage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class Login extends StatefulWidget {
-  const Login({Key? key, required this.title}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -205,7 +206,7 @@ class Login extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  // final String title;
 
   @override
   State<Login> createState() => _LoginState();
@@ -226,6 +227,7 @@ class _LoginState extends State<Login> {
       setState(() {
         _success = 2;
         _userEmail = user.email!;
+        setEmail(_userEmail);
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => MainPage()));
       });
@@ -251,7 +253,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
@@ -323,18 +326,13 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    _success == 1
-                        ? ''
-                        : (_success == 2
-                            ? 'Successfully signed in ' + _userEmail
-                            : 'Sign in failed'),
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 128, 167)),
-                  )),
+              // Container(
+              //     alignment: Alignment.center,
+              //     padding: const EdgeInsets.symmetric(horizontal: 16),
+              //     child:
+              //       style: const TextStyle(
+              //           color: Color.fromARGB(255, 0, 128, 167)),
+              //     )),
               const SizedBox(
                 height: 40,
               ),
@@ -381,6 +379,6 @@ class _LoginState extends State<Login> {
           ),
         )
       ],
-    ));
+    )));
   }
 }
