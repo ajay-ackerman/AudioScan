@@ -1,190 +1,3 @@
-// // // import 'dart:io';
-// // import 'package:google_sign_in/google_sign_in.dart';
-// // import 'package:flutter/material.dart';
-
-// // class Profile extends StatelessWidget {
-// //   GoogleSignIn _googleSignIn = GoogleSignIn(
-// //     scopes: [
-// //       'email',
-// //       'https://www.googleapis.com/auth/contacts.readonly',
-// //     ],
-// //   );
-// //   @override
-// //   Widget build(BuildContext context) => Scaffold(
-// //         appBar: AppBar(
-// //           title: Text("Profile"),
-// //           backgroundColor: Color.fromARGB(255, 0, 128, 167),
-// //           centerTitle: true,
-// //         ),
-// //         body: Container(
-// //           color: Color.fromARGB(255, 255, 255, 255),
-// //         ),
-// //       );
-// // }
-
-// import 'dart:async';
-// import 'dart:convert' show json;
-
-// import 'package:flutter/material.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:path/path.dart';
-
-// GoogleSignIn _googleSignIn = GoogleSignIn(
-//   // Optional clientId
-//   // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
-//   scopes: <String>[
-//     'email',
-//     'https://www.googleapis.com/auth/admin.directory.user.security',
-//   ],
-// );
-
-// void main() {
-//   runApp(
-//     const MaterialApp(
-//       title: 'Sign In',
-//       home: Profile(),
-//     ),
-//   );
-// }
-
-// class Profile extends StatefulWidget {
-//   const Profile({Key? key}) : super(key: key);
-
-//   @override
-//   State createState() => ProfileState();
-// }
-
-// class ProfileState extends State<Profile> {
-//   GoogleSignInAccount? _currentUser;
-//   String _contactText = '';
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
-//       setState(() {
-//         _currentUser = account;
-//       });
-//       if (_currentUser != null) {
-//         _handleGetContact(_currentUser!);
-//       }
-//     });
-//     _googleSignIn.signInSilently();
-//   }
-
-//   Future<void> _handleGetContact(GoogleSignInAccount user) async {
-//     setState(() {
-//       _contactText = 'Loading contact info...';
-//     });
-//     final http.Response response = await http.get(
-//       Uri.parse('https://people.googleapis.com/v1/people/me/connections'
-//           '?requestMask.includeField=person.names'),
-//       headers: await user.authHeaders,
-//     );
-//     if (response.statusCode != 200) {
-//       setState(() {
-//         _contactText = 'People API gave a ${response.statusCode} '
-//             'response. Check logs for details.';
-//       });
-//       print('People API ${response.statusCode} response: ${response.body}');
-//       return;
-//     }
-//     final Map<String, dynamic> data =
-//         json.decode(response.body) as Map<String, dynamic>;
-//     final String? namedContact = _pickFirstNamedContact(data);
-//     setState(() {
-//       if (namedContact != null) {
-//         _contactText = 'I see you know $namedContact!';
-//       } else {
-//         _contactText = 'No contacts to display.';
-//       }
-//     });
-//   }
-
-//   String? _pickFirstNamedContact(Map<String, dynamic> data) {
-//     final List<dynamic>? connections = data['connections'] as List<dynamic>?;
-//     final Map<String, dynamic>? contact = connections?.firstWhere(
-//       (dynamic contact) => contact['names'] != null,
-//       orElse: () => null,
-//     ) as Map<String, dynamic>?;
-//     if (contact != null) {
-//       final Map<String, dynamic>? name = contact['names'].firstWhere(
-//         (dynamic name) => name['displayName'] != null,
-//         orElse: () => null,
-//       ) as Map<String, dynamic>?;
-//       if (name != null) {
-//         return name['displayName'] as String?;
-//       }
-//     }
-//     return null;
-//   }
-
-//   Future<void> _handleSignIn() async {
-//     try {
-//       await _googleSignIn.signIn();
-//     } catch (error) {
-//       print(error);
-//     }
-//   }
-
-//   Future<void> _handleSignOut() => _googleSignIn.disconnect();
-
-//   Widget _buildBody() {
-//     final GoogleSignInAccount? user = _currentUser;
-//     if (user != null) {
-//       return Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceAround,
-//         children: <Widget>[
-//           ListTile(
-//             leading: GoogleUserCircleAvatar(
-//               identity: user,
-//             ),
-//             title: Text(user.displayName ?? ''),
-//             subtitle: Text(user.email),
-//           ),
-//           const Text('Signed in successfully.'),
-//           Text(_contactText),
-//           ElevatedButton(
-//             onPressed: _handleSignOut,
-//             child: const Text('SIGN OUT'),
-//           ),
-//           ElevatedButton(
-//             child: const Text('REFRESH'),
-//             onPressed: () => _handleGetContact(user),
-//           ),
-//         ],
-//       );
-//     } else {
-//       return Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceAround,
-//         children: <Widget>[
-//           const Text('You are not currently signed in.',
-//               style: TextStyle(fontFamily: "Trajan Pro")),
-//           ElevatedButton(
-//             onPressed: _handleSignIn,
-//             child: const Text('SIGN IN'),
-//           ),
-//         ],
-//       );
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: const Text('Google Sign In'),
-//         ),
-//         body: ConstrainedBox(
-//           constraints: const BoxConstraints.expand(),
-//           child: _buildBody(),
-//         ));
-//   }
-// }
-
-// ignore_for_file: unnecessary_const, deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -312,22 +125,22 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 5.0,
               ),
-              FlatButton(
-                  onPressed: resetPassword,
-                  child: Container(
-                    alignment: const Alignment(1, 0),
-                    padding: const EdgeInsets.only(top: 15, left: 20),
-                    child: const InkWell(
-                      child: Text(
-                        'Forgot Password',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat',
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  )),
+              // FlatButton(
+              //     onPressed: resetPassword,
+              //     child: Container(
+              //       alignment: const Alignment(1, 0),
+              //       padding: const EdgeInsets.only(top: 15, left: 20),
+              //       child: const InkWell(
+              //         child: Text(
+              //           'Forgot Password',
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               fontWeight: FontWeight.bold,
+              //               fontFamily: 'Montserrat',
+              //               decoration: TextDecoration.underline),
+              //         ),
+              //       ),
+              //     )),
               // Container(
               //     alignment: Alignment.center,
               //     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -385,21 +198,29 @@ class _LoginState extends State<Login> {
   }
 
   Future resetPassword() async {
+    print("//////////////////////////////////////////////////////" +
+        _emailController.text);
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => Center(
               child: CircularProgressIndicator(),
             ));
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: _userEmail);
 
+    try {
+      print("===================================\n" + _emailController.text);
+      await _auth.sendPasswordResetEmail(email: _emailController.text.trim());
+
+      // ignore: deprecated_member_use
       Scaffold.of(context).showSnackBar(
           const SnackBar(content: Text('Password reset email sent...')));
+      Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       print(e);
       Scaffold.of(context)
+          // ignore: deprecated_member_use
           .showSnackBar(SnackBar(content: Text(e.message.toString())));
+      Navigator.of(context).pop();
     }
   }
 }
