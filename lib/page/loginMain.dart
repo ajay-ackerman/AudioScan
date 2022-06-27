@@ -189,8 +189,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pdf_viewer/main.dart';
-import 'package:pdf_viewer/page/homePage.dart';
+// import 'package:pdf_viewer/page/homePage.dart';
 import 'package:pdf_viewer/page/profilepPage.dart';
+import 'package:pdf_viewer/page/utils.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -227,7 +228,6 @@ class _LoginState extends State<Login> {
       setState(() {
         _success = 2;
         _userEmail = user.email!;
-        setEmail(_userEmail);
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => MainPage()));
       });
@@ -312,20 +312,22 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 5.0,
               ),
-              Container(
-                alignment: const Alignment(1, 0),
-                padding: const EdgeInsets.only(top: 15, left: 20),
-                child: const InkWell(
-                  child: Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat',
-                        decoration: TextDecoration.underline),
-                  ),
-                ),
-              ),
+              FlatButton(
+                  onPressed: resetPassword,
+                  child: Container(
+                    alignment: const Alignment(1, 0),
+                    padding: const EdgeInsets.only(top: 15, left: 20),
+                    child: const InkWell(
+                      child: Text(
+                        'Forgot Password',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat',
+                            decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  )),
               // Container(
               //     alignment: Alignment.center,
               //     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -351,8 +353,8 @@ class _LoginState extends State<Login> {
                 //                 fontFamily: 'Montserrat')))),
                 child: RaisedButton(
                   onPressed: _singIn,
-                  color: Color.fromARGB(255, 0, 128, 167),
-                  child: Text("LOGIN"),
+                  color: const Color.fromARGB(255, 0, 128, 167),
+                  child: const Text("LOGIN"),
                   textColor: Colors.white,
                 ),
               ),
@@ -380,5 +382,24 @@ class _LoginState extends State<Login> {
         )
       ],
     )));
+  }
+
+  Future resetPassword() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _userEmail);
+
+      Scaffold.of(context).showSnackBar(
+          const SnackBar(content: Text('Password reset email sent...')));
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message.toString())));
+    }
   }
 }

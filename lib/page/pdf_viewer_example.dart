@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:clipboard/clipboard.dart';
+// import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -11,7 +11,7 @@ import 'package:path/path.dart';
 import 'package:read_pdf_text/read_pdf_text.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 // import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:text_to_speech/text_to_speech.dart';
+// import 'package:text_to_speech/text_to_speech.dart';
 import 'package:translator/translator.dart';
 import 'package:uc_pdfview/uc_pdfview.dart';
 

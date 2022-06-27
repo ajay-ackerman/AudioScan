@@ -6,7 +6,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer/api/speech_api.dart';
 // import 'package:pdf_viewer/main.dart';

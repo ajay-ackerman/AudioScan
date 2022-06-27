@@ -1,10 +1,11 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_viewer/page/profilepPage.dart';
+import 'package:pdf_viewer/page/loginMain.dart';
+// import 'package:pdf_viewer/page/profilepPage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -30,6 +31,8 @@ class _SignupPageState extends State<SignupPage> {
       setState(() {
         _sucess = true;
         _userEmail = user.email!;
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => const Login()));
       });
     } else {
       setState(() {
