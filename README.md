@@ -1,4 +1,5 @@
-Its a Android App developed by using flutter ,
+Hello there ✌️,
+AudioScan is a Android App developed by using flutter ,
 which provide pdf tools like :  
 Pdf to audio ,
 Audio to pdf ,
